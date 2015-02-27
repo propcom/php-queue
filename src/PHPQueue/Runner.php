@@ -106,7 +106,7 @@ class Runner
         }
         if (empty($newJob)) {
             $this->logger->addNotice("No Job found.");
-            $sleepTime = self::RUN_USLEEP * 10;
+            $sleepTime = self::RUN_USLEEP * 0;
         } else {
             try {
                 if (empty($newJob->worker)) {
