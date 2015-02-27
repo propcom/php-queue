@@ -150,6 +150,15 @@ class AmazonSQSV2 extends Base
     {
         $this->beforeRelease($jobId);
         $this->isJobOpen($jobId);
+		try {
+			$response = $this->getConnection()->changeMessageVisibility(array(
+				'QueueUrl'      => $this->queue_url,
+				'ReceiptHandle' => $jobId,
+				'VisibilityTimeout' => 10,
+			));
+		} catch (SqsException $exception) {
+			throw new BackendException($exception->getMessage(), $exception->getCode());
+		}
         $this->last_job_id = $jobId;
         $this->afterClearRelease();
 
