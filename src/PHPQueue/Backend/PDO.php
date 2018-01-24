@@ -44,6 +44,7 @@ class PDO extends Base
     public function connect()
     {
         $this->connection = new \PDO($this->connection_string, $this->db_user, $this->db_password, $this->pdo_options);
+        $this->createTable($this->db_table);
     }
 
     public function add($data = null)
